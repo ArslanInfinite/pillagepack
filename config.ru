@@ -5,4 +5,5 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride #sinatra middleware that allows for sending patch/delete requests 
+use UsersController
 run ApplicationController
