@@ -14,7 +14,16 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
+     
     <div class="wrapper">
+
+     <div class="nav">
+        <% if logged_in?(session)%>
+          <h5><a href="/">All Items</a></h5><br>
+          <h5><a href="/">Pick A Pack</a></h5><br>
+          <h5><a href="/logout">Logout</a></h5><br>
+        <% end %>
+      </div>
 
         <%= yield %>
 
