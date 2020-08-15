@@ -19,9 +19,10 @@
 
      <div class="nav">
         <% if logged_in?(session)%>
-          <h5><a href="/">All Items</a></h5><br>
-          <h5><a href="/">Pick A Pack</a></h5><br>
-          <h5><a href="/logout">Logout</a></h5><br>
+          <h4><a href="/packs">Pick A Pack</a></h4>
+          <h4><a href="/items">All Items</a></h4>
+          <h4><a href="/logout">Logout</a></h4>
+          <%# <h4><a href="/users/user.id">Profile Page</a></h4> %>
         <% end %>
       </div>
 

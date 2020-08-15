@@ -1,0 +1,14 @@
+<br>
+<h2>Pick A Pack</h2>
+
+<% @packs.each do |pack| %>
+  <div class="pack-container">
+    <h4>Name: <%= pack.name %></h4><br>
+    <img src="<%= pack.pack_image_url %>" alt="<%= pack.name %> photo" height="500" width="900"><br><br>
+      <div class="item--content">
+        <form action="/add_pack_to_user" method="post">
+          <input type="submit" name="submit" value="Select This Pack">
+        </form>
+        <% end %>
+        </div>
+  </div>

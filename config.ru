@@ -7,4 +7,5 @@ end
 use Rack::MethodOverride #sinatra middleware that allows for sending patch/delete requests 
 use UsersController
 use PacksController
+use ItemsController
 run ApplicationController

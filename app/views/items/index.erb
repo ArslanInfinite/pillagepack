@@ -1,0 +1,24 @@
+<br>
+Select Category:
+<a href="/items/Mechs">Mechs</a>
+<a href="/items/Weapons">Weapons</a>
+<a href="/items/Vehicles">Vehicles</a>
+<a href="/items/Sentries">Sentries</a>
+<a href="/items/Buddies">Buddies</a>
+<a href="/items/Barriers">Barriers</a>
+
+<br>
+
+<h1>All Items</h1>
+<% @items.each do |item| %>
+  <div class="item-container">
+    <h4>Name: <%= item.name %><br></h4>
+    <h4>Category: <%= item.category %><br></h4>
+    <img src="<%= item.item_image_url %>" alt="<%= item.name %> photo" height="500" width="900"><br><br>
+      <div class="item--content">
+        <form action="/add_item" method="post">
+          <input type="submit" name="submit" value="Add To Pack">
+        </form>
+<% end %>
+      </div>
+  </div>

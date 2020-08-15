@@ -11,21 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200725025854) do
+ActiveRecord::Schema.define(version: 20200810153405) do
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.string "description"
+    t.string "item_image_url"
+  end
+
+  create_table "pack_items", force: :cascade do |t|
+    t.integer "pack_id"
+    t.integer "item_id"
+  end
 
   create_table "packs", force: :cascade do |t|
-    t.string   "name"
-    t.string   "pack_image_url"
-    t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string  "name"
+    t.string  "pack_image_url"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string "name"
+    t.string "password_digest"
   end
 
 end

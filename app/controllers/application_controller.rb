@@ -11,6 +11,7 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     if logged_in?(session)
+          binding.pry
       redirect "/users/#{current_user.id}"
     else 
       erb :welcome
@@ -40,7 +41,7 @@ class ApplicationController < Sinatra::Base
 
     def login_redirect(session)
       if logged_in?(session)
-      redirect '/usershowpage'
+      redirect '/user/show'
       end 
     end
 
