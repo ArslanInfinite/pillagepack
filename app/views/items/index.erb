@@ -12,13 +12,24 @@ Select Category:
 <h1>All Items</h1>
 <% @items.each do |item| %>
   <div class="item-container">
-    <h4>Name: <%= item.name %><br></h4>
-    <h4>Category: <%= item.category %><br></h4>
+    <h4>Name: <%= item.name %></h4><br>
+    <h5>Description: <%= item.description %></h5><br>
     <img src="<%= item.item_image_url %>" alt="<%= item.name %> photo" height="500" width="900"><br><br>
       <div class="item--content">
-        <form action="/add_item" method="post">
-          <input type="submit" name="submit" value="Add To Pack">
+        <form action="/add_item_to_pack/<%= item.id %>" method="post">
+          <select name="pack_id">
+            <option>--choose pack--</option>
+            <% current_user.packs.each do |pack| %>
+              <option value="<%= pack.id %>"><%= pack.name %></option>
+            <% end %>
+          </select> 
+            <% if current_user.packs.any? %>
+               <input type="submit" name="submit" value="Add">
+            <% else %>
+              <p>Got to the packs page and select a pack</p>
+            <% end %>
         </form>
-<% end %>
+          <br>
+        <% end %>
       </div>
   </div>

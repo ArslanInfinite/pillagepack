@@ -1,0 +1,7 @@
+<br>
+<% @pack_items.each do |pack_item| %>
+  <h4>Name: <%= pack_item.item.name %></h4><br>
+  <h5>Category: <%= pack_item.item.category %></h5><br>
+  <h5>Description: <%= pack_item.item.description %></h5><br>
+  <%= pack_item.item.item_image_url %><br><br>
+<% end %>

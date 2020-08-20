@@ -22,6 +22,19 @@ class PacksController < ApplicationController
     end
   end
 
-end 
+  get '/packs/:id' do
+    #gets params from url
+    @pack = Pack.find(params[:id]) #define instance variable for view
+    @pack_items = current_user.pack_items.where(pack_id: @pack.id)
+    erb :'packs/show' #show single pack view
+  end
 
- 
+  post '/add_pack_to_user/:id' do 
+    @pack = Pack.find(params[:id])
+    if !current_user.pack_items.include?(@pack)
+      UserPack.create(pack_id: @pack.id, user_id: current_user.id)
+    end
+    redirect '/items'
+  end
+
+end

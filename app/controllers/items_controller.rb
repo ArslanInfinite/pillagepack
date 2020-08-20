@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
 
   post '/items' do
   #below works with properly formatted params in HTML form
-   @item = Item.new(name: params[:name], category: params[:category], description: params[:description], item_image_url: params[:item_image_url]) #create new item
+   @item = Item.new(name: params[:name], category: params[:category], description: params[:description], item_image_url: params[:item_image_url], user_id: current_user.id) #create new item
     if @item.save #saves new item or returns false if unsuccessful
       redirect '/items' #redirect back to items index page
     else
@@ -29,7 +29,58 @@ class ItemsController < ApplicationController
     end
   end
 
+  post '/add_item_to_pack/:id' do 
+    @item = Item.find(params[:id])
+    @pack = Pack.find(params[:pack_id])
+    PackItem.create(item_id: @item.id, pack_id: @pack.id, user_id: current_user.id)
+    redirect '/items'
+  end 
+
+  get '/items/:id' do 
+    #gets params from url
+    @item = Item.find(params[:id]) #define instance variable for view
+    erb :'items/show' #show single item view
+  end
     # /add_item_to_pack
 
+  get '/items/:id/edit' do 
+    #get params from url
+    @item = Item.find(params[:id]) #define intstance variable for view
+    erb :'items/edit' #show edit item view
+  end
+
+  patch '/items/:id' do
+    #get params from url
+    @item = Item.find(params[:id]) #define variable to edit
+
+    # TODO: Ensure Item can be updated by it's creator
+
+    if current_user.id == @item.id 
+      @item.assign_attributes(params[:item]) #assign new attributes
+
+      if @item.save #saves new item or returns false if unsuccessful
+        redirect '/items' #redirect back to items index page
+      else
+         erb :'items/edit' #show edit item view again(potentially displaying errors)
+      end
+    else
+     redirect '/items'
+    end
+
+
+
+  end
+
+  delete '/items/:id' do
+    #get params from url
+    @item = Item.find(params[:id]) #define item to delete
+   
+    if current_user.id == @item.user_id 
+      @item.destroy #delete item
+      redirect '/items' #redirect back to items index page
+    else
+      redirect '/items'
+    end
+  end
 
 end 

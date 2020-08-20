@@ -1,0 +1,21 @@
+<div class="item form">
+  <h1>Edit Your Item</h1>
+  <div>
+    <form action="/items/<%=@item.id%>" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" name="name" required value="<%=@item.name%>"><br>
+        <label>Description</label>
+        <input type="text" class="form-control" name="description" required value="<%=@item.description%>"><br>
+        <label>Item Image URL</label>
+        <input type="text" class="form-control" name="item_image_url" required value="<%=@item.item_image_url%>"><br>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  <p><a href="/items/<%=@item.id%>">Back to your account</a></p>
+  <p><form action="/items/<%=@item.id%>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Item">
+  </form></p>
+</div>

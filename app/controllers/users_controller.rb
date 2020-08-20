@@ -8,9 +8,8 @@ class UsersController < ApplicationController
   end
 
   post '/users' do
-    if params[:name].empty? || params[:password].empty?
+    if params[:name].empty? || params[:password].empty? || User.where(name: params[:name]).any?
       redirect '/users/new'
-    # else name.unique???
     else
       @user = User.create(params)
       session[:user_id] = @user.id
@@ -73,7 +72,7 @@ class UsersController < ApplicationController
   delete '/users/:id' do
     @user = User.find_by(params[:id])
     if logged_in?(session) && @user == current_user
-      @user.packs.each do |pack|
+      @user.user_packs.each do |pack|
         pack.delete
       end
       @user.items.each do |item|
