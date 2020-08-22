@@ -1,24 +1,23 @@
 <br>
 Select Category:
-<a href="/items/Mechs">Mechs</a>
-<a href="/items/Weapons">Weapons</a>
-<a href="/items/Vehicles">Vehicles</a>
-<a href="/items/Sentries">Sentries</a>
-<a href="/items/Buddies">Buddies</a>
-<a href="/items/Barriers">Barriers</a>
+<a href="/items/category/Mechs">Mechs</a>
+<a href="/items/category/Weapons">Weapons</a>
+<a href="/items/category/Vehicles">Vehicles</a>
+<a href="/items/category/Sentries">Sentries</a>
+<a href="/items/category/Buddies">Buddies</a>
+<a href="/items/category/Barriers">Barriers</a>
 
 <br>
 
 <h1>All Items</h1>
 <% @items.each do |item| %>
   <div class="item-container">
-    <h4>Name: <%= item.name %></h4><br>
+    <h4><a href="/items/<%= item.id %>"> <%= item.name %> </a> </h4><br>
     <h5>Description: <%= item.description %></h5><br>
     <img src="<%= item.item_image_url %>" alt="<%= item.name %> photo" height="500" width="900"><br><br>
       <div class="item--content">
         <form action="/add_item_to_pack/<%= item.id %>" method="post">
           <select name="pack_id">
-            <option>--choose pack--</option>
             <% current_user.packs.each do |pack| %>
               <option value="<%= pack.id %>"><%= pack.name %></option>
             <% end %>

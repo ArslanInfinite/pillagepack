@@ -70,15 +70,11 @@ class UsersController < ApplicationController
   end
 
   delete '/users/:id' do
-    @user = User.find_by(params[:id])
-    if logged_in?(session) && @user == current_user
-      @user.user_packs.each do |pack|
+    if logged_in?(session)
+      current_user.user_packs.each do |pack|
         pack.delete
       end
-      @user.items.each do |item|
-        item.delete
-      end
-      @user.delete
+      current_user.delete
       session.clear
       redirect to '/'
     else

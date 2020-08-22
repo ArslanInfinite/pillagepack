@@ -10,13 +10,19 @@ class ItemsController < ApplicationController
     erb :'items/index'
   end 
 
-  get '/items/new' do
-    erb :'/items/new'
+  get '/items/:id' do 
+    #gets params from url
+    @item = Item.find(params[:id]) #define instance variable for view
+    erb :'items/show' #show single item view
   end
 
-  get '/items/:category' do
+  get '/items/category/:category' do
     @items = Item.where(category: params[:category])
     erb :'items/index'
+  end
+
+  get '/items/new' do
+    erb :'/items/new'
   end
 
   post '/items' do
@@ -36,13 +42,6 @@ class ItemsController < ApplicationController
     redirect '/items'
   end 
 
-  get '/items/:id' do 
-    #gets params from url
-    @item = Item.find(params[:id]) #define instance variable for view
-    erb :'items/show' #show single item view
-  end
-    # /add_item_to_pack
-
   get '/items/:id/edit' do 
     #get params from url
     @item = Item.find(params[:id]) #define intstance variable for view
@@ -52,12 +51,9 @@ class ItemsController < ApplicationController
   patch '/items/:id' do
     #get params from url
     @item = Item.find(params[:id]) #define variable to edit
-
-    # TODO: Ensure Item can be updated by it's creator
-
+    # Ensure Item can be updated by it's creator
     if current_user.id == @item.id 
       @item.assign_attributes(params[:item]) #assign new attributes
-
       if @item.save #saves new item or returns false if unsuccessful
         redirect '/items' #redirect back to items index page
       else
@@ -66,15 +62,11 @@ class ItemsController < ApplicationController
     else
      redirect '/items'
     end
-
-
-
   end
 
   delete '/items/:id' do
     #get params from url
     @item = Item.find(params[:id]) #define item to delete
-   
     if current_user.id == @item.user_id 
       @item.destroy #delete item
       redirect '/items' #redirect back to items index page
