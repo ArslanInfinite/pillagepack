@@ -4,8 +4,9 @@
 <% @packs.each do |pack| %>
   <% if !current_user.packs.include?(pack) %>
     <div class="pack-container">
+    <br>
+    <br>
       <h4>Name: <%= pack.name %></h4><br>
-
       <img src="<%= pack.pack_image_url %>" alt="<%= pack.name %> photo" height="500" width="900"><br><br>
         <div class="item--content">
           <form action="/add_pack_to_user/<%= pack.id %>" method="post">

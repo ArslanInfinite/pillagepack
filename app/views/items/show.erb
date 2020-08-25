@@ -1,9 +1,10 @@
+<br>
 <h1><%= @item.name %></h1>
-
 <div>
 	<%= @item.description %>
 </div>
-
+<br>
 <img src="<%= @item.item_image_url %>" alt="<%= @item.name %>" height="500px" width="900px"/>
-
-
+<br>
+<br>
+<h4><a href="/items/<%= @item.id %>/edit">Edit Your Item </a></h4>

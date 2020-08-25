@@ -1,7 +1,9 @@
 <br>
 <h1>Hello, <%= current_user.name%></h1>
-<h4><a href="/users/<%= current_user.id %>/edit">Edit Profile </a></h4>
-<h2> My packs</h2>
+<h5><a href="/users/<%= current_user.id %>/edit">Edit Profile </a></h5>
+<br>
+<br>
+<h2> Your Packs</h2>
 
 <table style="width:100%">
   <tr>
@@ -15,11 +17,10 @@
     </td>
     <td>
        <a href="<%= pack.pack_image_url %>">
-	      <img src="<%= pack.pack_image_url %>" alt="<%= pack.name %>" width="900px" height="500px" />
+	      <img src="<%= pack.pack_image_url %>" alt="<%= pack.name %>" width="450px" height="250px" />
        </a>
     </td>
   </tr>
 
 <% end %>
 </table>
-
