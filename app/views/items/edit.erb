@@ -1,7 +1,7 @@
 <div class="item form">
   <h1>Edit Your Item</h1>
   <div>
-    <form action="/items/<%=@item.id%>" method="post">
+    <form action="/items/<%=@item.id%>" method="patch">
       <input type="hidden" name="_method" value="patch">
       <div class="form-group">
         <label>Name</label>
