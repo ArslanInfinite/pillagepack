@@ -26,17 +26,22 @@ class ItemsController < ApplicationController
 
   get '/items/:id/edit' do
     #get params from url
-    @item = Item.find(params[:id]) #define intstance variable for view
-    erb :'items/edit' #show edit item view
+    @item = Item.find(params[:id])
+    if current_user.id == @item.user_id 
+     #define intstance variable for view
+      erb :'items/edit' #show edit item view
+    else 
+      redirect '/items'
+    end 
   end
 
   patch '/items/:id' do
     #get params from url
     @item = Item.find(params[:id]) #define variable to edit
     # Ensure Item can be updated by it's creator
-    if current_user.id == @item.id 
-      @item.assign_attributes(params[:item])
-      binding.pry 
+    if current_user.id == @item.user_id
+    #if current_user.id == @item.id 
+      @item.update(name: params[:name], description: params[:description], item_image_url: params[:item_image_url])
       #assign new attributes
       if @item.save #saves new item or returns false if unsuccessful
         redirect '/items' #redirect back to items index page

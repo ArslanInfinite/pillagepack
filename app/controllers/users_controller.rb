@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   patch '/users/:id' do
-    @user = User.find_by(params[:id])
+    @user = User.find_by(id: params[:id])
     @user.name = params[:name].strip
     @user.password = params[:password].strip
     if logged_in?(session) && @user == current_user
