@@ -71,8 +71,6 @@ class ItemsController < ApplicationController
     redirect '/items'
   end 
 
-  
-
   delete '/items/:id' do
     #get params from url
     @item = Item.find(params[:id]) #define item to delete

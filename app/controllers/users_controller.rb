@@ -74,6 +74,9 @@ class UsersController < ApplicationController
       current_user.user_packs.each do |pack|
         pack.delete
       end
+      current_user.pack_items.each do |item|
+        item.delete
+      end
       current_user.delete
       session.clear
       redirect to '/'
